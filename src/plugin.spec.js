@@ -7,7 +7,7 @@ describe('InstanceHeader [Plugin]', () => {
   let component;
 
   beforeEach((done) => {
-    component = mount(<InstanceHeaderPlugin />);
+    component = mount(<InstanceHeaderPlugin sidebarCollapsed={false}/>);
     done();
   });
 

@@ -13,12 +13,7 @@ describe('InstanceHeaderStore [Store]', () => {
   });
   const NamespaceStore = Reflux.createStore({
     mixins: [StateMixin.store],
-    getInitialState() {
-      return { ns: 'initial' };
-    },
-    get ns() {
-      return 'initial';
-    }
+    ns: 'initial'
   });
 
 
@@ -42,18 +37,16 @@ describe('InstanceHeaderStore [Store]', () => {
 
       context('when write state changes', () => {
         beforeEach(() => {
-          expect(store.getState().activeNamespace).to.equal('initial'); // initial state
-          expect(store.getState().name).to.equal('Retrieving instance information'); // initial state
+          expect(store.getState().activeNamespace).to.equal(''); // initial state
+          expect(store.getState().name).to.equal('Retrieving connection information'); // initial state
           NamespaceStore.ns = 'test';
           WriteStateStore.setState({
             isWritable: false
           });
         });
 
-        it('sets activeNamespace', () => {
+        it('sets activeNamespace and name', () => {
           expect(store.getState().activeNamespace).to.equal('test');
-        });
-        it('sets name', () => {
           expect(store.getState().name).to.equal('My Cluster');
         });
       });
@@ -61,21 +54,19 @@ describe('InstanceHeaderStore [Store]', () => {
       context('when data service is initialized', () => {
         beforeEach(() => {
           expect(store.getState().connection).to.equal(null); // initial state
-          expect(store.getState().name).to.equal('Retrieving instance information'); // initial state
-          appRegistry.emit('data-service-initialized', {isFavorite: true, name: 'Test Cluster'});
+          expect(store.getState().name).to.equal('Retrieving connection information'); // initial state
+          appRegistry.emit('data-service-initialized', {client: {model: {is_favorite: true, name: 'Test Cluster'}}});
         });
 
-        it('sets connection', () => {
-          expect(store.getState().connection).to.deep.equal({isFavorite: true, name: 'Test Cluster'});
-        });
-        it('sets name', () => {
+        it('sets name and connection', () => {
           expect(store.getState().name).to.equal('Test Cluster');
+          expect(store.getState().connection).to.deep.equal({is_favorite: true, name: 'Test Cluster'});
         });
       });
 
       context('when collection changes', () => {
         beforeEach(() => {
-          expect(store.getState().activeNamespace).to.equal('initial'); // initial state
+          expect(store.getState().activeNamespace).to.equal(''); // initial state
           appRegistry.emit('collection-changed', 'new collection');
         });
 
@@ -85,7 +76,7 @@ describe('InstanceHeaderStore [Store]', () => {
       });
       context('when db changes', () => {
         beforeEach(() => {
-          expect(store.getState().activeNamespace).to.equal('initial'); // initial state
+          expect(store.getState().activeNamespace).to.equal(''); // initial state
           appRegistry.emit('database-changed', 'new database');
         });
 
