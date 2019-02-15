@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import styles from './instance-header.less';
 
 class InstanceHeader extends PureComponent {
-  static displayName = "InstanceHeader";
+  static displayName = 'InstanceHeader';
 
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -99,7 +99,7 @@ class InstanceHeader extends PureComponent {
 const mapStateToProps = (state, ownProps) => ({
   name: state.name,
   sidebarCollapsed: ownProps.sidebarCollapsed,
-  activeNamespace: state.activeNamespace,
+  activeNamespace: state.activeNamespace
 });
 
 /**

@@ -9,7 +9,6 @@ import name, {
 import connection, {
   INITIAL_STATE as CONNECTION_IS
 } from 'modules/connection';
-import appRegistry from 'modules/app-registry';
 import { RESET } from 'modules/reset';
 
 /**
@@ -18,8 +17,7 @@ import { RESET } from 'modules/reset';
 const reducer = combineReducers({
   activeNamespace,
   name,
-  connection,
-  appRegistry
+  connection
 });
 
 /**

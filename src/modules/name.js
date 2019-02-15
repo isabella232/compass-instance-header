@@ -1,7 +1,7 @@
 /**
  * Create name action.
  */
-export const CHANGE_NAME = 'instance-header/name/CHANGE_NAME';
+export const SET_NAME = 'instance-header/name/SET_NAME';
 
 /**
  * The initial state of the instance header name.
@@ -26,14 +26,14 @@ const connectionString = (name, showFull) => {
  * @returns {String} The new state.
  */
 export default function reducer(state = INITIAL_STATE, action) {
-  if (action.type === CHANGE_NAME) {
+  if (action.type === SET_NAME) {
     return action.name;
   }
   return state;
 }
 
 export const setName = (name) => ({
-  type: CHANGE_NAME,
+  type: SET_NAME,
   name: name
 });
 
@@ -48,7 +48,7 @@ export const changeName = () => {
   return (dispatch, getState) => {
     const state = getState();
     const connection = state.connection;
-    const name = state.connection.is_favorite ? connection.name : CLUSTER;
+    const name = state.connection !== null && state.connection.is_favorite ? connection.name : CLUSTER;
     dispatch(setName(connectionString(name)));
   };
 };
