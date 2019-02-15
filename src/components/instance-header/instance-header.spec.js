@@ -8,7 +8,7 @@ describe('InstanceHeader [Component]', () => {
   let component;
 
   beforeEach(() => {
-    component = mount(<InstanceHeader />);
+    component = mount(<InstanceHeader sidebarCollapsed={false}/>);
   });
 
   afterEach(() => {
@@ -16,6 +16,6 @@ describe('InstanceHeader [Component]', () => {
   });
 
   it('renders the correct root classname', () => {
-    expect(component.find(`.${styles.root}`)).to.be.present();
+    expect(component.find(`.${styles['instance-header']}`)).to.be.present();
   });
 });
