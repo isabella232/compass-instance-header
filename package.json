@@ -1,5 +1,5 @@
 {
-  "name": "@mongodb-js/instance-header",
+  "name": "@mongodb-js/compass-instance-header",
   "productName": "Instance Header plugin",
   "version": "0.0.2",
   "apiVersion": "2.0.0",
