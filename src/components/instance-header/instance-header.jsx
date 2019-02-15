@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
-// import ipc from 'hadron-ipc';
 import map from 'lodash.map';
 import filter from 'lodash.filter';
 
@@ -48,7 +47,8 @@ class InstanceHeader extends PureComponent {
   handleClickHostname() {
     const NamespaceStore = global.hadronApp.appRegistry.getStore('App.NamespaceStore');
     NamespaceStore.ns = '';
-    // ipc.call('window:hide-collection-submenu');
+    const ipc = require('hadron-ipc');
+    ipc.call('window:hide-collection-submenu');
   }
 
   /**
