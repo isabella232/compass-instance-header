@@ -18,6 +18,7 @@ const appRegistry = new AppRegistry();
 
 global.hadronApp = app;
 global.hadronApp.appRegistry = appRegistry;
+global.hadronApp.instance = { genuineMongoDB: { isGenuine: true } };
 
 // Activate our plugin with the Hadron App Registry
 activate(appRegistry);
