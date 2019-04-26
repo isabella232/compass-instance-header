@@ -59,7 +59,7 @@ class InstanceHeader extends PureComponent {
     return (
       <div className={classnames(styles['non-genuine-warning'])}>
         <div className={classnames(styles['non-genuine-warning-text'])}>
-          <FontAwesome name="exclamation-triangle"/>
+          <FontAwesome name="exclamation-circle"/>
           &nbsp;NON-GENUINE MONGODB
         </div>
       </div>
