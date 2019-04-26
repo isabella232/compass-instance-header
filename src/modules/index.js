@@ -9,6 +9,10 @@ import name, {
 import connection, {
   INITIAL_STATE as CONNECTION_IS
 } from 'modules/connection';
+import isGenuineMongoDB, {
+  INITIAL_STATE as GENUINE_IS
+} from 'modules/is-genuine-mongodb';
+
 import { RESET } from 'modules/reset';
 
 /**
@@ -17,7 +21,8 @@ import { RESET } from 'modules/reset';
 const reducer = combineReducers({
   activeNamespace,
   name,
-  connection
+  connection,
+  isGenuineMongoDB
 });
 
 /**
@@ -34,7 +39,8 @@ const rootReducer = (state, action) => {
       ...state,
       activeNamespace: ACTIVE_NAMESPACE_IS,
       name: NAME_IS,
-      connection: CONNECTION_IS
+      connection: CONNECTION_IS,
+      isGenuineMongoDB: GENUINE_IS
     };
   }
   return reducer(state, action);

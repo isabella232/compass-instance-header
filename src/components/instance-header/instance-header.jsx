@@ -1,3 +1,4 @@
+/* eslint react/sort-comp:0 */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -14,14 +15,14 @@ class InstanceHeader extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
     sidebarCollapsed: PropTypes.bool.isRequired,
-    activeNamespace: PropTypes.string.isRequired
+    activeNamespace: PropTypes.string.isRequired,
+    isGenuineMongoDB: PropTypes.bool.isRequired
   };
 
   constructor(props) {
     super(props);
     this.setupHeaderItems();
   }
-
 
   /**
    * creates React components for the plugins registering as the
@@ -49,6 +50,20 @@ class InstanceHeader extends PureComponent {
     NamespaceStore.ns = '';
     const ipc = require('hadron-ipc');
     ipc.call('window:hide-collection-submenu');
+  }
+
+  renderNonGenuineMongoDB() {
+    if (this.props.isGenuineMongoDB) {
+      return null;
+    }
+    return (
+      <div className={classnames(styles['non-genuine-warning'])}>
+        <div className={classnames(styles['non-genuine-warning-text'])}>
+          <FontAwesome name="exclamation-triangle"/>
+          &nbsp;NON-GENUINE MONGODB
+        </div>
+      </div>
+    );
   }
 
   /**
@@ -83,6 +98,7 @@ class InstanceHeader extends PureComponent {
         </div>
         <div className={classnames(styles['instance-header-items'], styles['instance-header-items-is-right'])}>
           {this.rightHeaderItems}
+          {this.renderNonGenuineMongoDB()}
         </div>
       </div>
     );
@@ -99,7 +115,8 @@ class InstanceHeader extends PureComponent {
 const mapStateToProps = (state, ownProps) => ({
   name: state.name,
   sidebarCollapsed: ownProps.sidebarCollapsed,
-  activeNamespace: state.activeNamespace
+  activeNamespace: state.activeNamespace,
+  isGenuineMongoDB: state.isGenuineMongoDB
 });
 
 /**

@@ -7,6 +7,7 @@ import InstanceHeaderPlugin, { activate } from 'plugin';
 import DeploymentStateStore from './stores/deployment-state-store';
 import NamespaceStore from './stores/namespace-store';
 import { activate as deploymentAwarenessActivate } from '@mongodb-js/compass-deployment-awareness';
+import MongoDBInstance from 'mongodb-instance-model';
 
 // Import global less file. Note: these styles WILL NOT be used in compass, as compass provides its own set
 // of global styles. If you are wishing to style a given component, you should be writing a less file per
@@ -18,6 +19,8 @@ const appRegistry = new AppRegistry();
 
 global.hadronApp = app;
 global.hadronApp.appRegistry = appRegistry;
+global.hadronApp.instance = new MongoDBInstance();
+global.hadronApp.instance.genuineMongoDB = { isGenuine: false };
 
 // Activate our plugin with the Hadron App Registry
 activate(appRegistry);
