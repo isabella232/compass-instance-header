@@ -6,6 +6,10 @@ import FontAwesome from 'react-fontawesome';
 import map from 'lodash.map';
 import filter from 'lodash.filter';
 
+import NonGenuineWarningModal from 'components/non-genuine-warning-modal';
+import { toggleIsVisible } from 'modules/is-visible';
+import { openLink } from 'modules/link';
+
 import classnames from 'classnames';
 import styles from './instance-header.less';
 
@@ -16,7 +20,10 @@ class InstanceHeader extends PureComponent {
     name: PropTypes.string.isRequired,
     sidebarCollapsed: PropTypes.bool.isRequired,
     activeNamespace: PropTypes.string.isRequired,
-    isGenuineMongoDB: PropTypes.bool.isRequired
+    isGenuineMongoDB: PropTypes.bool.isRequired,
+    isVisible: PropTypes.bool.isRequired,
+    toggleIsVisible: PropTypes.func.isRequired,
+    openLink: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -57,7 +64,10 @@ class InstanceHeader extends PureComponent {
       return null;
     }
     return (
-      <div className={classnames(styles['non-genuine-warning'])}>
+      <div
+        className={classnames(styles['non-genuine-warning'])}
+        onClick={() => this.props.toggleIsVisible(true)}
+      >
         <div className={classnames(styles['non-genuine-warning-text'])}>
           <FontAwesome name="exclamation-circle"/>
           &nbsp;NON-GENUINE MONGODB
@@ -100,6 +110,11 @@ class InstanceHeader extends PureComponent {
           {this.rightHeaderItems}
           {this.renderNonGenuineMongoDB()}
         </div>
+        <NonGenuineWarningModal
+          isVisible={this.props.isVisible}
+          toggleIsVisible={this.props.toggleIsVisible}
+          openLink={this.props.openLink}
+        />
       </div>
     );
   }
@@ -116,7 +131,8 @@ const mapStateToProps = (state, ownProps) => ({
   name: state.name,
   sidebarCollapsed: ownProps.sidebarCollapsed,
   activeNamespace: state.activeNamespace,
-  isGenuineMongoDB: state.isGenuineMongoDB
+  isGenuineMongoDB: state.isGenuineMongoDB,
+  isVisible: state.isVisible
 });
 
 /**
@@ -126,6 +142,8 @@ const mapStateToProps = (state, ownProps) => ({
 const MappedInstanceHeader = connect(
   mapStateToProps,
   {
+    toggleIsVisible,
+    openLink
   },
 )(InstanceHeader);
 
