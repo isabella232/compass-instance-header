@@ -6,10 +6,22 @@ import styles from './instance-header.less';
 
 describe('InstanceHeader [Component]', () => {
   let component;
+  let toggleIsVisibleSpy = sinon.spy();
+  let openLinkSpy = sinon.spy();
 
   describe('not collapsed', () => {
     beforeEach(() => {
-      component = mount(<InstanceHeader sidebarCollapsed={false} name="name" activeNamespace="active namespace"/>);
+      component = mount(
+        <InstanceHeader
+          sidebarCollapsed={false}
+          name="name"
+          activeNamespace="active namespace"
+          isGenuineMongoDB
+          isVisible={false}
+          toggleIsVisible={toggleIsVisibleSpy}
+          openLink={openLinkSpy}
+        />
+      );
     });
 
     afterEach(() => {
@@ -26,7 +38,17 @@ describe('InstanceHeader [Component]', () => {
 
   describe('collapsed', () => {
     beforeEach(() => {
-      component = mount(<InstanceHeader sidebarCollapsed name="name" activeNamespace="active namespace"/>);
+      component = mount(
+        <InstanceHeader
+          sidebarCollapsed
+          name="name"
+          activeNamespace="active namespace"
+          isGenuineMongoDB
+          isVisible={false}
+          toggleIsVisible={toggleIsVisibleSpy}
+          openLink={openLinkSpy}
+        />
+      );
     });
 
     afterEach(() => {
@@ -46,7 +68,16 @@ describe('InstanceHeader [Component]', () => {
 
   describe('genuine', () => {
     beforeEach(() => {
-      component = mount(<InstanceHeader sidebarCollapsed name="name" activeNamespace="active namespace" isGenuineMongoDB/>);
+      component = mount(
+        <InstanceHeader
+          sidebarCollapsed name="name"
+          activeNamespace="active namespace"
+          isVisible={false}
+          isGenuineMongoDB
+          toggleIsVisible={toggleIsVisibleSpy}
+          openLink={openLinkSpy}
+        />
+      );
     });
 
     afterEach(() => {
@@ -63,7 +94,19 @@ describe('InstanceHeader [Component]', () => {
 
   describe('non genuine', () => {
     beforeEach(() => {
-      component = mount(<InstanceHeader sidebarCollapsed name="name" activeNamespace="active namespace" isGenuineMongoDB={false}/>);
+      toggleIsVisibleSpy = sinon.spy();
+      openLinkSpy = sinon.spy();
+      component = mount(
+        <InstanceHeader
+          sidebarCollapsed
+          name="name"
+          activeNamespace="active namespace"
+          isVisible={false}
+          isGenuineMongoDB={false}
+          toggleIsVisible={toggleIsVisibleSpy}
+          openLink={openLinkSpy}
+        />
+      );
     });
 
     afterEach(() => {
@@ -75,6 +118,10 @@ describe('InstanceHeader [Component]', () => {
     });
     it('does not render the warning', () => {
       expect(component.find(`.${styles['non-genuine-warning']}`)).to.be.present();
+    });
+    it('clicking the warning opens the modal', () => {
+      component.find(`.${styles['non-genuine-warning']}`).simulate('click');
+      expect(toggleIsVisibleSpy.calledOnce).to.equal(true);
     });
   });
 });

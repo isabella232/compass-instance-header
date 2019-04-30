@@ -18,7 +18,6 @@ const appRegistry = new AppRegistry();
 
 global.hadronApp = app;
 global.hadronApp.appRegistry = appRegistry;
-global.hadronApp.instance = { genuineMongoDB: { isGenuine: true } };
 
 // Activate our plugin with the Hadron App Registry
 activate(appRegistry);
@@ -72,6 +71,7 @@ appRegistry.emit('data-service-initialized', dataService);
 DeploymentStateStore.setToInitial();
 dataService.connect((error, ds) => {
   appRegistry.emit('data-service-connected', error, ds);
+  appRegistry.emit('instance-refreshed', { instance: { genuineMongoDB: { isGenuine: false }}});
 });
 
 if (module.hot) {

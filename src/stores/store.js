@@ -6,6 +6,7 @@ import { changeName } from 'modules/name';
 import { changeConnection } from 'modules/connection';
 import { changeActiveNamespace } from 'modules/active-namespace';
 import { toggleIsGenuineMongoDB } from 'modules/is-genuine-mongodb';
+import { toggleIsVisible } from 'modules/is-visible';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -21,6 +22,7 @@ store.onActivated = (appRegistry) => {
       state.instance.genuineMongoDB;
 
     store.dispatch(toggleIsGenuineMongoDB(isGenuine.isGenuine));
+    store.dispatch(toggleIsVisible(!isGenuine.isGenuine));
   });
 
   appRegistry.getStore('DeploymentAwareness.WriteStateStore').listen(() => {
