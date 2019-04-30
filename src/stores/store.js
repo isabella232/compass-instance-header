@@ -15,10 +15,10 @@ store.onActivated = (appRegistry) => {
     store.dispatch(changeName());
   });
 
-  appRegistry.on('data-service-connected', () => {
-    const isGenuine = global.hadronApp.instance.genuineMongoDB === undefined ?
-      { isGenuine: true } :
-      global.hadronApp.instance.genuineMongoDB;
+  appRegistry.on('instance-refreshed', (state) => {
+    const isGenuine = state.instance.genuineMongoDB === undefined ?
+      { isGenuine: true, dbType: 'mongodb' } :
+      state.instance.genuineMongoDB;
 
     store.dispatch(toggleIsGenuineMongoDB(isGenuine.isGenuine));
   });
