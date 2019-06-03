@@ -7,6 +7,7 @@ import { changeConnection } from 'modules/connection';
 import { changeActiveNamespace } from 'modules/active-namespace';
 import { toggleIsGenuineMongoDB } from 'modules/is-genuine-mongodb';
 import { toggleIsVisible } from 'modules/is-visible';
+import { reset } from 'modules/reset';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -38,6 +39,10 @@ store.onActivated = (appRegistry) => {
 
   appRegistry.on('database-changed', (ns) => {
     store.dispatch(changeActiveNamespace(ns || ''));
+  });
+
+  appRegistry.on('data-service-disconnected', () => {
+    store.dispatch(reset());
   });
 };
 
