@@ -71,7 +71,7 @@ appRegistry.emit('data-service-initialized', dataService);
 DeploymentStateStore.setToInitial();
 dataService.connect((error, ds) => {
   appRegistry.emit('data-service-connected', error, ds);
-  appRegistry.emit('instance-refreshed', { instance: { genuineMongoDB: { isGenuine: false }}});
+  appRegistry.emit('instance-refreshed', { instance: { genuineMongoDB: { isGenuine: true }}});
 });
 
 if (module.hot) {
