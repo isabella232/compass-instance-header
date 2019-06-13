@@ -11,14 +11,10 @@ import styles from './non-genuine-warning-modal.less';
 /**
  * The help URL for collation.
  */
-const P1 = 'This server or service appears to be emulating'
-  + ' MongoDB. Some documented MongoDB features may work differently, may be'
-  + ' entirely missing or incomplete, or may have unexpectedly different'
-  + ' performance characteristics than would be found when connecting to a'
-  + ' real MongoDB server or service.';
-const WARNING_BANNER = 'This server or service appears to be emulating MongoDB.';
-export const ATLAS_URL = 'https://www.mongodb.com/cloud/atlas';
-export const LEARN_MORE_URL = '';
+const P1 = 'Some documented MongoDB features may work differently, be entirely missing'
+  + 'or incomplete, or have unexpected performance characteristics';
+const WARNING_BANNER = 'This server or service appears to be an emulation of MongoDB rather than an official MongoDB product.';
+export const LEARN_MORE_URL = 'https://docs.mongodb.com/compass/master/faq/#how-does-compass-determine-a-connection-is-not-genuine';
 export const MODAL_TITLE = 'Non-Genuine MongoDB Detected';
 
 /**
@@ -44,18 +40,6 @@ class NonGenuineWarningModal extends PureComponent {
   }
 
   /**
-   * User wants to try Atlas.
-   *
-   * @param {Object} evt - The click event.
-   */
-  handleTryAtlasClick(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    this.props.openLink(ATLAS_URL);
-    this.props.toggleIsVisible(false);
-  }
-
-  /**
    * Render the non-genuine mongodb warning modal.
    *
    * @returns {React.Component} The non-genuine warning modal.
@@ -75,6 +59,10 @@ class NonGenuineWarningModal extends PureComponent {
           <div className={classnames(styles['non-genuine-warning-modal-message'])}>
             <FontAwesome name="exclamation-circle"/>
             &nbsp; {WARNING_BANNER} &nbsp;
+          </div>
+
+          <div className={classnames(styles['non-genuine-warning-modal-p1'])}>
+            {P1} &nbsp;
             <a
               onClick={() => this.props.openLink(LEARN_MORE_URL)}
               data-test-id="non-genuine-warning-modal-learn-more-link"
@@ -82,32 +70,9 @@ class NonGenuineWarningModal extends PureComponent {
               Learn more
             </a>&nbsp;
           </div>
-
-          <div className={classnames(styles['non-genuine-warning-modal-p1'])}>
-            {P1}
-          </div>
-
-          <div className={classnames(styles['non-genuine-warning-modal-p2'])}>
-            <b>Recommended:</b>&nbsp;
-            <a
-              onClick={() => this.props.openLink(ATLAS_URL)}
-              data-test-id="non-genuine-warning-modal-atlas-link"
-            >
-              MongoDB Atlas&nbsp;<FontAwesome name="external-link"/>
-            </a>&nbsp;
-             is the fully managed database-as-a-service with all the
-             features and performance of MongoDB. Atlas runs on AWS, Azure, and GCP.
-             To explore Atlas, use the promotional code<code>MONGO4REAL</code>
-             for 250 USD of Atlas credit.
-          </div>
         </Modal.Body>
 
         <Modal.Footer>
-          <TextButton
-            className="btn btn-default btn-sm"
-            dataTestId="try-mongodb-atlas-button"
-            text="TRY MONGODB ATLAS"
-            clickHandler={this.handleTryAtlasClick.bind(this)} />
           <TextButton
             className="btn btn-primary btn-sm"
             dataTestId="continue-button"
