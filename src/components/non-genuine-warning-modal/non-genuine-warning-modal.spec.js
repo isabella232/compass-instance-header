@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import NonGenuineWarningModal, {
   MODAL_TITLE,
-  ATLAS_URL,
   LEARN_MORE_URL
 } from './non-genuine-warning-modal.jsx';
 import styles from './non-genuine-warning-modal.less';
@@ -43,17 +42,8 @@ describe('NonGenuineWarningModal [Component]', () => {
       expect(component.find('.modal-title')).to.have.text(MODAL_TITLE);
     });
 
-    it('renders the try atlas button', () => {
-      expect(component.find('[data-test-id="try-mongodb-atlas-button"]').hostNodes()).to.have.text('TRY MONGODB ATLAS');
-    });
-
     it('renders the continue button', () => {
       expect(component.find('[data-test-id="continue-button"]').hostNodes()).to.have.text('CONTINUE');
-    });
-
-    it('opens the atlas link', () => {
-      component.find('[data-test-id="non-genuine-warning-modal-atlas-link"]').simulate('click');
-      expect(openLinkSpy.calledWith(ATLAS_URL)).to.equal(true);
     });
 
     it('opens the learn more link', () => {
@@ -64,12 +54,6 @@ describe('NonGenuineWarningModal [Component]', () => {
     it('closes on continue', () => {
       component.find('[data-test-id="continue-button"]').simulate('click');
       expect(toggleIsVisibleSpy.calledOnce).to.equal(true);
-    });
-
-    it('opens link + closes on try atlas', () => {
-      component.find('[data-test-id="try-mongodb-atlas-button"]').simulate('click');
-      expect(toggleIsVisibleSpy.calledOnce).to.equal(true);
-      expect(openLinkSpy.calledWith(ATLAS_URL)).to.equal(true);
     });
   });
 
