@@ -103,10 +103,10 @@ class InstanceHeader extends PureComponent {
             {this.props.name}
           </div>
         </div>
-        <div className={classnames(styles['instance-header-items'], styles['instance-header-items-is-left'])}>
+        <div className={classnames(styles['instance-header-items'])}>
           {this.leftHeaderItems}
         </div>
-        <div className={classnames(styles['instance-header-items'], styles['instance-header-items-is-right'])}>
+        <div className={classnames(styles['instance-header-items'])}>
           {this.rightHeaderItems}
           {this.renderNonGenuineMongoDB()}
         </div>

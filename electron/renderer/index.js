@@ -7,6 +7,7 @@ import InstanceHeaderPlugin, { activate } from 'plugin';
 import DeploymentStateStore from './stores/deployment-state-store';
 import NamespaceStore from './stores/namespace-store';
 import { activate as deploymentAwarenessActivate } from '@mongodb-js/compass-deployment-awareness';
+import { activate as versionActivate } from '@mongodb-js/compass-server-version';
 
 // Import global less file. Note: these styles WILL NOT be used in compass, as compass provides its own set
 // of global styles. If you are wishing to style a given component, you should be writing a less file per
@@ -24,6 +25,7 @@ activate(appRegistry);
 
 // Add the one role for the right side
 deploymentAwarenessActivate(appRegistry);
+versionActivate(appRegistry);
 
 appRegistry.registerStore('DeploymentAwareness.WriteStateStore', DeploymentStateStore);
 appRegistry.registerStore('App.NamespaceStore', NamespaceStore);
@@ -71,7 +73,15 @@ appRegistry.emit('data-service-initialized', dataService);
 DeploymentStateStore.setToInitial();
 dataService.connect((error, ds) => {
   appRegistry.emit('data-service-connected', error, ds);
-  appRegistry.emit('instance-refreshed', { instance: { genuineMongoDB: { isGenuine: true }}});
+  appRegistry.emit('instance-refreshed', {
+    instance: {
+      build: {
+        enterprise_module: false,
+        version: '4.2.0'
+      },
+      genuineMongoDB: { isGenuine: true }
+    }
+  });
 });
 
 if (module.hot) {

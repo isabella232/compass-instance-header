@@ -32,7 +32,7 @@ describe('InstanceHeader [Component]', () => {
       expect(component.find(`.${styles['instance-header']}`)).to.be.present();
     });
     it('renders one item on the left', () => {
-      expect(component.find(`.${styles['instance-header-items-is-left']}`).children()).to.have.lengthOf(1);
+      expect(component.find(`.${styles['instance-header-items']}`).children()).to.have.lengthOf(1);
     });
   });
 
@@ -62,7 +62,7 @@ describe('InstanceHeader [Component]', () => {
       expect(component.find(`.${styles['instance-header-sidebar-collapsed']}`)).to.be.present();
     });
     it('renders one item on the left', () => {
-      expect(component.find(`.${styles['instance-header-items-is-left']}`).children()).to.have.lengthOf(1);
+      expect(component.find(`.${styles['instance-header-items']}`).children()).to.have.lengthOf(1);
     });
   });
 

@@ -8,9 +8,9 @@
 @compass-sidebar-transition-time: 400ms;
 
 .instance-header {
-  background-color: @gray8;
   color: @pw;
   display: flex;
+  flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 36px;
@@ -26,10 +26,6 @@
     background-color: @compass-sidebar-hover-background-color;
     box-shadow: inset 0 -1px 0 0 #393E43;
     cursor: pointer;
-    flex-basis: auto;
-    width: 250px;
-    flex-grow: 0;
-    flex-shrink: 0;
     overflow: hidden;
     display: flex;
     transition: width @compass-sidebar-transition-time ease;
@@ -72,24 +68,9 @@
 
   &-items {
     display: flex;
-    flex-grow: 2;
-    flex-shrink: 10;
-    align-items: center;
-
-    &-is-left {
-      padding-left: 5px;
-      justify-content: flex-start;
-    }
-
-    &-is-right {
-      padding-right: 5px;
-      flex-direction: row-reverse;
-    }
-
-    & > * {
-      padding: 0 5px;
-      color: @gray3;
-    }
+    flex-direction: column;
+    padding-left: 25px;
+    background-color: @compass-sidebar-base-background-color;
   }
 
   /*SIDEBAR COLLAPSED STATE*/
@@ -122,6 +103,9 @@
   font-family: "Akzidenz", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   cursor: pointer;
+  padding: 4px 0px 8px 8px;
+  align-items: center;
+
   &-text {
     background-color: #FBB129;
     text-transform: uppercase;
