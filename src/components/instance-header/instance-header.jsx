@@ -53,8 +53,7 @@ class InstanceHeader extends PureComponent {
   }
 
   handleClickHostname() {
-    const NamespaceStore = global.hadronApp.appRegistry.getStore('App.NamespaceStore');
-    NamespaceStore.ns = '';
+    global.hadronApp.appRegistry.emit('select-instance');
     const ipc = require('hadron-ipc');
     ipc.call('window:hide-collection-submenu');
   }
@@ -66,8 +65,7 @@ class InstanceHeader extends PureComponent {
     return (
       <div
         className={classnames(styles['non-genuine-warning'])}
-        onClick={() => this.props.toggleIsVisible(true)}
-      >
+        onClick={() => this.props.toggleIsVisible(true)}>
         <div className={classnames(styles['non-genuine-warning-text'])}>
           <FontAwesome name="exclamation-circle"/>
           &nbsp;NON-GENUINE MONGODB
