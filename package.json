@@ -1,7 +1,7 @@
 {
   "name": "@mongodb-js/compass-instance-header",
   "productName": "Instance Header plugin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "apiVersion": "2.0.0",
   "description": "The plugin for the instance header",
   "main": "lib/index.js",
