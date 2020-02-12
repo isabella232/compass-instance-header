@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@mongodb-js/compass-deployment-awareness": "^8.1.0",
-    "@mongodb-js/compass-server-version": "^2.3.3",
+    "@mongodb-js/compass-server-version": "^4.0.0",
     "@mongodb-js/compass-ssh-tunnel-status": "^2.2.0",
     "autoprefixer": "^9.7.4",
     "babel-cli": "^6.26.0",
