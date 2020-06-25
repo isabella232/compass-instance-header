@@ -45,7 +45,7 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
-    "@mongodb-js/compass-deployment-awareness": "^8.1.0",
+    "@mongodb-js/compass-deployment-awareness": "^10.0.7",
     "@mongodb-js/compass-server-version": "^4.0.0",
     "@mongodb-js/compass-ssh-tunnel-status": "^5.0.0",
     "autoprefixer": "^9.7.4",
