@@ -13,3 +13,5 @@ scripts/
 test/
 src/
 .nyc_output/
+scripts/**/*
+!scripts/download-akzidenz.js
